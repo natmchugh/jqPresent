@@ -127,6 +127,7 @@
           if($present.hash() != t) $present.changeSlide(t);
           return false;
         });
+        $('ol#pager > li').first().addClass('selected');
 
       };
 
@@ -229,7 +230,7 @@
       $present.changeSlide = function(newSlideNo, opts) {
         var direction = newSlideNo - $present.hash();
         $present.hash(newSlideNo);
-
+   
         if($present.transitioning) {
           $present.oldSlide.stop(false, true);
           $present.currentSlide.stop(false, true);
@@ -266,6 +267,14 @@
         if(oldSlide && $present.pointsOnSlide(oldSlide, ':hidden').length == 0) {
           oldSlide.data('visited', true);
         }
+
+        $('ol#pager > li > a').each(function(index) {
+          if (newSlideNo === index+1) {
+            $(this).parent().addClass('selected');
+          } else {
+            $(this).parent().removeClass('selected');
+          }
+        });
 
         $present.oldSlide = oldSlide;
         $present.currentSlide = newSlide;

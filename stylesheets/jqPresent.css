@@ -80,7 +80,9 @@ a:link, a:hover, a:visited {
   display: inline;
   margin-right: 20px;
 }
-
+    #pager li.selected a{
+        color: red;
+    }
 #footer {
   position: absolute;
   bottom: 0;
