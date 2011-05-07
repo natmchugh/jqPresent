@@ -158,12 +158,12 @@ $.fn.present = function(options) {
         state.currentSlide.stop(false, true);
       }
       $('ol#pager > li > a').each(function(index) {
-        if (newSlideNo === index+1) {
-          $(this).parent().addClass('selected');
-        } else {
-          $(this).parent().removeClass('selected');
-        }
-      });
+      if (newSlideNo === index+1) {
+        $(this).parent().addClass('selected');
+      } else {
+        $(this).parent().removeClass('selected');
+      }
+    });
       var oldSlide = state.currentSlide;
       var newSlide = state.slides.filter(':nth-child(' + newSlideNo + ')');
 
@@ -318,7 +318,7 @@ $.fn.present = function(options) {
 
   // Pager link creation + event hook
   var pagerLinks = state.slides.map(function(k,v) {
-    return '<li><a href="#"' + (k+1) + '">' + (k+1) + '</a></li>';
+    return '<li class="slide'+(k+1)+'"><a href="#"' + (k+1) + '">' + (k+1) + '</a></li>';
   }).get().join("\n");
 
   $(options.pagerSelector).html(pagerLinks).click(function(e) {
@@ -326,7 +326,6 @@ $.fn.present = function(options) {
     if(util.hash() != t) slides.change(t);
     return false;
   });
-  $('ol#pager > li').first().addClass('selected');
 
   return this;
 }
